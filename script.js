@@ -146,6 +146,85 @@
   syncVideos();
   showProject(0);
 
+  const diagnosticForm = $('#diagnosticForm');
+  if (diagnosticForm) {
+    const submitButton = $('button[type="submit"]', diagnosticForm);
+    const formNote = $('.form-note', diagnosticForm);
+    const originalButtonHtml = submitButton?.innerHTML || 'Enviar solicitação';
+
+    if (submitButton) submitButton.innerHTML = 'Enviar solicitação <span>↗</span>';
+    if (formNote) {
+      formNote.textContent = 'Ao enviar, seus dados serão encaminhados ao e-mail comercial da Sales Tech por um serviço de formulário.';
+    }
+
+    diagnosticForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      const email = String(config.contactEmail || '').trim();
+      const value = (id) => document.getElementById(id)?.value.trim() || '';
+      const name = value('leadName');
+      const company = value('leadCompany');
+      const city = value('leadCity');
+      const contact = value('leadContact');
+      const problem = value('leadProblem');
+
+      if (!email || !name || !company || !contact || !problem) {
+        if (formNote) formNote.textContent = 'Preencha os campos obrigatórios antes de enviar.';
+        return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+      }
+      if (formNote) formNote.textContent = 'Enviando sua solicitação...';
+
+      try {
+        const response = await fetch(`https://formsubmit.co/ajax/${email}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            _subject: `Novo diagnóstico Sales Tech — ${company}`,
+            _template: 'table',
+            _honey: '',
+            Nome: name,
+            Empresa: company,
+            Cidade: city || 'Não informado',
+            Contato: contact,
+            'Problema informado': problem,
+            Origem: 'salestech.agency'
+          })
+        });
+
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        if (data.success === false) throw new Error(data.message || 'Falha no envio');
+
+        diagnosticForm.reset();
+        if (submitButton) submitButton.textContent = 'Solicitação enviada ✓';
+        if (formNote) formNote.textContent = 'Recebemos sua solicitação. A Sales Tech entrará em contato pelos dados informados.';
+
+        window.setTimeout(() => {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonHtml.replace('Preparar solicitação', 'Enviar solicitação');
+          }
+        }, 3500);
+      } catch (error) {
+        console.error('Falha ao enviar diagnóstico:', error);
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.innerHTML = 'Tentar novamente <span>↗</span>';
+        }
+        if (formNote) formNote.textContent = `Não foi possível enviar agora. Você também pode escrever para ${email}.`;
+      }
+    }, true);
+  }
+
   const revealItems = $$('.reveal');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
