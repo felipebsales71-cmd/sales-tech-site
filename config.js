@@ -1,5 +1,6 @@
 window.SALES_TECH_CONFIG = {
-  whatsappNumber: "5595XXXXXXXXX",
+  contactEmail: "sales.tech.rr.dev@gmail.com",
+  whatsappNumber: "",
   whatsappMessage: "Olá! Conheci a Sales Tech pelo site e gostaria de conversar sobre uma solução para minha empresa.",
   instagramUrl: "https://instagram.com/SEUINSTAGRAM",
   demoVideos: [
