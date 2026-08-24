@@ -87,7 +87,7 @@
   document.querySelectorAll('*').forEach((el) => {
     if (el.children.length === 0) {
       const txt = el.textContent.trim();
-      if (txt.includes('BOA VISTA')) {
+      if (txt.toLowerCase().includes('boa vista')) {
         el.textContent = 'ATENDIMENTO EM TODO O BRASIL';
       }
     }
