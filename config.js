@@ -7,8 +7,17 @@ window.SALES_TECH_CONFIG = {
 };
 
 (() => {
-  const script = document.createElement('script');
-  script.src = 'portfolio.js';
-  script.async = true;
-  document.head.appendChild(script);
+  const loadV3 = () => {
+    const v3 = document.createElement('script');
+    v3.src = 'v3.js?v=3.0.0';
+    v3.async = false;
+    document.head.appendChild(v3);
+  };
+
+  const portfolio = document.createElement('script');
+  portfolio.src = 'portfolio.js?v=3.0.0';
+  portfolio.async = false;
+  portfolio.onload = loadV3;
+  portfolio.onerror = loadV3;
+  document.head.appendChild(portfolio);
 })();
