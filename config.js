@@ -13,7 +13,7 @@ window.SALES_TECH_CONFIG = {
   document.head.appendChild(stylesheet);
 
   const brandScript = document.createElement('script');
-  brandScript.src = 'brand.js?v=20260824';
+  brandScript.src = 'brand.js?v=20260824-2';
   brandScript.async = false;
   document.head.appendChild(brandScript);
 })();
