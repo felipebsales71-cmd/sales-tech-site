@@ -1,5 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#5ce8ff"/><stop offset="1" stop-color="#5b7cff"/></linearGradient></defs>
-  <rect width="64" height="64" rx="16" fill="#07101c"/>
-  <path d="M17 20h31l-6 8H22l-5-8Zm5 12h25l-6 8H27l-5-8Zm5 12h15l-6 8h-4l-5-8Z" fill="url(#g)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Sales Tech">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="43%" r="72%">
+      <stop offset="0" stop-color="#092765"/>
+      <stop offset="0.58" stop-color="#061c4d"/>
+      <stop offset="1" stop-color="#031036"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="30" y1="20" x2="220" y2="235" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1fe6f2"/>
+      <stop offset="0.52" stop-color="#04c1ff"/>
+      <stop offset="1" stop-color="#1585ff"/>
+    </linearGradient>
+    <linearGradient id="letters" x1="54" y1="100" x2="205" y2="171" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.42" stop-color="#d7f8ff"/>
+      <stop offset="0.72" stop-color="#3ed8ff"/>
+      <stop offset="1" stop-color="#00aaf4"/>
+    </linearGradient>
+    <linearGradient id="arc" x1="72" y1="59" x2="199" y2="195" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#12b5ff" stop-opacity=".12"/>
+      <stop offset=".34" stop-color="#03e2ff"/>
+      <stop offset=".68" stop-color="#05aff8"/>
+      <stop offset="1" stop-color="#15d9ff" stop-opacity=".18"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <circle cx="128" cy="128" r="119" fill="url(#bg)" stroke="url(#ring)" stroke-width="4.5"/>
+  <path d="M83 78 C112 48 171 46 198 79 C171 68 126 62 83 78 Z" fill="url(#arc)" filter="url(#glow)"/>
+  <path d="M58 176 C86 213 148 226 194 190 C164 215 101 216 58 176 Z" fill="url(#arc)" filter="url(#glow)"/>
+  <path d="M183 93 H96 C79 93 67 104 67 118 C67 132 79 143 96 143 H127 C142 143 152 151 152 162 C152 175 141 183 125 183 H47 L60 166 H124 C130 166 134 163 134 159 C134 155 130 152 124 152 H94 C66 152 48 139 48 118 C48 97 67 81 96 81 H196 Z" fill="url(#letters)"/>
+  <path d="M140 93 H219 L205 111 H181 L169 183 H143 L155 111 H132 Z" fill="url(#letters)"/>
 </svg>
