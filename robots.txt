@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://salestech.agency/sitemap.xml
