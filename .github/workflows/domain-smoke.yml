@@ -27,13 +27,20 @@ jobs:
           curl "${curl_flags[@]}" "$base_url/" -o index.html
           grep -F "Software para organizar a operação" index.html
           grep -F "Sales Tech Finance" index.html
+          grep -F "Solicitar diagnóstico" index.html
           grep -F "privacidade.html" index.html
           grep -F "termos.html" index.html
 
           curl "${curl_flags[@]}" "$base_url/config.js" -o config.js
-          grep -F 'whatsappNumber: "5595991325476"' config.js
           grep -F 'https://www.instagram.com/salestech.rr/' config.js
           grep -F 'title: "Sales Tech Finance"' config.js
+
+          curl "${curl_flags[@]}" "$base_url/script.js" -o script.js
+
+          if grep -Eiq 'wa\.me|whatsappNumber|data-whatsapp|floating-whatsapp|5595991325476|99132-5476' index.html config.js script.js; then
+            echo "Personal WhatsApp data is still present in published assets."
+            exit 1
+          fi
 
           curl "${curl_flags[@]}" "$base_url/privacidade.html" -o privacidade.html
           grep -F "Aviso de Privacidade" privacidade.html
@@ -42,6 +49,5 @@ jobs:
           grep -F "Termos de Uso" termos.html
 
           curl "${curl_flags[@]}" "$base_url/styles.css" -o /dev/null
-          curl "${curl_flags[@]}" "$base_url/script.js" -o /dev/null
 
           echo "Production smoke test passed."
