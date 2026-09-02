@@ -6,23 +6,20 @@ Site oficial da Sales Tech, publicado em `https://salestech.agency` por Cloudfla
 
 - `index.html` — estrutura e conteúdo institucional.
 - `styles.css` — identidade visual e responsividade.
-- `script.js` — WhatsApp, Instagram, formulário, portfólio e vídeos.
-- `config.js` — contatos, links e projetos editáveis.
+- `script.js` — Instagram, formulário, portfólio e vídeos.
+- `config.js` — e-mail, Instagram, links e projetos editáveis.
 - `privacidade.html` — aviso de privacidade.
 - `termos.html` — termos de uso.
 - `GUIA-ALTERAR-PORTFOLIO.md` — instruções detalhadas para alterações manuais.
 
 ## Alterações comerciais rápidas
 
-Para mudar WhatsApp, Instagram, e-mail, links ou vídeos, edite somente `config.js`.
+Para mudar Instagram, e-mail, links ou vídeos, edite somente `config.js`.
 
-### WhatsApp
-
-Use DDI + DDD + número, apenas dígitos:
+### E-mail
 
 ```js
-whatsappNumber: "5595991325476",
-whatsappDisplay: "(95) 99132-5476",
+contactEmail: "sales.tech.rr.dev@gmail.com",
 ```
 
 ### Instagram
@@ -70,7 +67,7 @@ http://localhost:8080
 
 ## Cuidados
 
-- Não publique senhas, tokens ou chaves no repositório.
+- Não publique números pessoais, senhas, tokens ou chaves no repositório.
 - Não remova vírgulas ou aspas do `config.js`.
 - Não anuncie integrações ou resultados que ainda não tenham sido validados.
 - Revise o Aviso de Privacidade e os Termos sempre que o formulário, prestadores ou modelo de negócio mudarem.
