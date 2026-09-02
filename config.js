@@ -4,7 +4,6 @@
  * Este é o principal arquivo para alterações manuais.
  *
  * Regras:
- * - WhatsApp: DDI + DDD + número, somente dígitos.
  * - projectUrl: link para abrir o sistema/site. Deixe "" para esconder o botão.
  * - videoUrl: link do YouTube, YouTube Shorts, youtu.be ou arquivo MP4.
  *   Deixe "" enquanto não houver vídeo.
@@ -13,11 +12,6 @@
 
 window.SALES_TECH_CONFIG = {
   contactEmail: "sales.tech.rr.dev@gmail.com",
-
-  whatsappNumber: "5595991325476",
-  whatsappDisplay: "(95) 99132-5476",
-  whatsappMessage: "Olá! Vim pelo site da Sales Tech e gostaria de conversar sobre uma solução para minha empresa.",
-
   instagramUrl: "https://www.instagram.com/salestech.rr/",
 
   projects: [
