@@ -1,0 +1,47 @@
+name: Production domain smoke test
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Wait for Cloudflare deployment
+        run: sleep 35
+
+      - name: Validate public site
+        shell: bash
+        run: |
+          set -euo pipefail
+          base_url="https://salestech.agency"
+          curl_flags=(--fail --silent --show-error --location --retry 8 --retry-delay 5 --retry-all-errors --max-time 30)
+
+          curl "${curl_flags[@]}" "$base_url/" -o index.html
+          grep -F "Software para organizar a operação" index.html
+          grep -F "Sales Tech Finance" index.html
+          grep -F "privacidade.html" index.html
+          grep -F "termos.html" index.html
+
+          curl "${curl_flags[@]}" "$base_url/config.js" -o config.js
+          grep -F 'whatsappNumber: "5595991325476"' config.js
+          grep -F 'https://www.instagram.com/salestech.rr/' config.js
+          grep -F 'title: "Sales Tech Finance"' config.js
+
+          curl "${curl_flags[@]}" "$base_url/privacidade.html" -o privacidade.html
+          grep -F "Aviso de Privacidade" privacidade.html
+
+          curl "${curl_flags[@]}" "$base_url/termos.html" -o termos.html
+          grep -F "Termos de Uso" termos.html
+
+          curl "${curl_flags[@]}" "$base_url/styles.css" -o /dev/null
+          curl "${curl_flags[@]}" "$base_url/script.js" -o /dev/null
+
+          echo "Production smoke test passed."
