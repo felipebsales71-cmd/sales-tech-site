@@ -141,15 +141,15 @@ Recomenda-se manter apenas o Sales Tech Finance como destaque principal.
 - apagar uma vírgula;
 - usar aspas “curvas” copiadas de editor de texto;
 - deixar uma URL fora das aspas;
-- colocar número de WhatsApp com `+`, espaços ou parênteses em `whatsappNumber`;
 - editar o arquivo errado;
+- publicar número pessoal, senha, token ou chave no repositório;
 - fazer commit em outra branch e esperar alteração imediata em produção.
 
 ## 10. Conferência final
 
 Depois do commit:
 
-1. aguarde a publicação automática da Cloudflare;
+1. acompanhe a publicação automática da Cloudflare no GitHub;
 2. abra `https://salestech.agency`;
 3. atualize com `Ctrl + F5`;
 4. teste o botão;
