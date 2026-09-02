@@ -4,7 +4,7 @@
 .gitignore
 .assetsignore
 node_modules
-README.md
+*.md
 wrangler.jsonc
 package.json
 package-lock.json
