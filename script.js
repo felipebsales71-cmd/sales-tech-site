@@ -50,31 +50,6 @@
   window.addEventListener("scroll", updateHeader, { passive: true });
 
   /* Canais comerciais */
-  const whatsappNumber = text(config.whatsappNumber).replace(/\D/g, "");
-  const defaultWhatsappMessage = text(
-    config.whatsappMessage,
-    "Olá! Vim pelo site da Sales Tech e gostaria de conversar."
-  );
-
-  const whatsappUrl = (customMessage) => {
-    const message = text(customMessage, defaultWhatsappMessage);
-    if (!whatsappNumber) return "#contato";
-    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  };
-
-  $$("[data-whatsapp]").forEach((link) => {
-    link.href = whatsappUrl(link.dataset.message);
-    if (whatsappNumber) {
-      link.target = "_blank";
-      link.rel = "noopener";
-    }
-  });
-
-  const whatsappDisplay = $("#whatsappDisplay");
-  if (whatsappDisplay && config.whatsappDisplay) {
-    whatsappDisplay.textContent = text(config.whatsappDisplay);
-  }
-
   const instagramUrl = text(config.instagramUrl);
   $$("[data-instagram]").forEach((link) => {
     if (!instagramUrl) {
@@ -378,7 +353,7 @@
           button.textContent = "Tentar novamente";
         }
         if (note) {
-          note.textContent = `Não foi possível enviar agora. Fale pelo WhatsApp ou escreva para ${email}.`;
+          note.textContent = `Não foi possível enviar agora. Escreva para ${email}.`;
         }
       }
     });
