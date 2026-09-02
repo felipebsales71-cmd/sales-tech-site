@@ -1,41 +1,76 @@
-# Sales Tech — Site institucional/comercial
+# Sales Tech — site institucional e comercial
 
-Site estático, rápido e pronto para Cloudflare Pages.
+Site oficial da Sales Tech, publicado em `https://salestech.agency` por Cloudflare Workers Builds.
 
-## Antes de publicar
+## Arquivos principais
 
-Edite somente `config.js`:
+- `index.html` — estrutura e conteúdo institucional.
+- `styles.css` — identidade visual e responsividade.
+- `script.js` — WhatsApp, Instagram, formulário, portfólio e vídeos.
+- `config.js` — contatos, links e projetos editáveis.
+- `privacidade.html` — aviso de privacidade.
+- `termos.html` — termos de uso.
+- `GUIA-ALTERAR-PORTFOLIO.md` — instruções detalhadas para alterações manuais.
 
-1. `whatsappNumber`: DDI + DDD + número, apenas dígitos. Ex.: `5595999999999`.
-2. `instagramUrl`: URL completa do Instagram.
-3. `demoVideos`: três URLs, na ordem dos projetos. Aceita YouTube ou MP4.
+## Alterações comerciais rápidas
+
+Para mudar WhatsApp, Instagram, e-mail, links ou vídeos, edite somente `config.js`.
+
+### WhatsApp
+
+Use DDI + DDD + número, apenas dígitos:
+
+```js
+whatsappNumber: "5595991325476",
+whatsappDisplay: "(95) 99132-5476",
+```
+
+### Instagram
+
+```js
+instagramUrl: "https://www.instagram.com/salestech.rr/",
+```
+
+### Links e vídeos do portfólio
+
+Cada projeto possui:
+
+```js
+projectUrl: "",
+videoUrl: ""
+```
+
+- Coloque o endereço do sistema em `projectUrl`.
+- Coloque um link do YouTube, YouTube Shorts, `youtu.be` ou MP4 em `videoUrl`.
+- Deixe `""` para esconder o botão correspondente.
+
+Consulte `GUIA-ALTERAR-PORTFOLIO.md` para exemplos completos.
+
+## Publicação
+
+A branch de produção é `main`. Cada alteração aprovada e enviada para `main` inicia uma publicação automática na Cloudflare.
+
+O Worker usa a rota:
+
+```text
+salestech.agency/*
+```
 
 ## Rodar localmente
-
-Você pode abrir `index.html` diretamente ou executar um servidor local:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-Depois acesse `http://localhost:8080`.
+Depois acesse:
 
-## Cloudflare Pages
+```text
+http://localhost:8080
+```
 
-Este projeto não precisa de build.
+## Cuidados
 
-Ao conectar o repositório no Cloudflare Pages:
-
-- Framework preset: `None`
-- Build command: deixar em branco
-- Build output directory: `/` ou raiz do projeto
-
-Depois, em `Custom domains`, adicione `salestech.agency`.
-
-## Estrutura
-
-- `index.html` — conteúdo do site
-- `styles.css` — layout e responsividade
-- `script.js` — navegação, animações, portfólio e modal de vídeo
-- `config.js` — links comerciais e vídeos
-- `assets/favicon.svg` — ícone do site
+- Não publique senhas, tokens ou chaves no repositório.
+- Não remova vírgulas ou aspas do `config.js`.
+- Não anuncie integrações ou resultados que ainda não tenham sido validados.
+- Revise o Aviso de Privacidade e os Termos sempre que o formulário, prestadores ou modelo de negócio mudarem.
