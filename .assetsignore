@@ -1,0 +1,10 @@
+# Arquivos operacionais que não devem ser publicados como conteúdo do site
+.git
+.github
+.gitignore
+.assetsignore
+node_modules
+README.md
+wrangler.jsonc
+package.json
+package-lock.json
