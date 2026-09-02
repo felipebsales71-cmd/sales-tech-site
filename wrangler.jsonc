@@ -9,8 +9,8 @@
   },
   "routes": [
     {
-      "pattern": "salestech.agency",
-      "custom_domain": true
+      "pattern": "salestech.agency/*",
+      "zone_name": "salestech.agency"
     }
   ]
 }
