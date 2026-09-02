@@ -1,0 +1,59 @@
+name: Domain smoke test
+
+on:
+  push:
+    branches:
+      - chore/connect-salestech-domain
+    paths:
+      - .github/workflows/domain-smoke.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-domain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Resolve DNS and fetch production site
+        shell: bash
+        run: |
+          set -u
+          REPORT="$RUNNER_TEMP/domain-smoke-report.txt"
+          BODY="$RUNNER_TEMP/domain-body.html"
+
+          {
+            echo "checked_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "domain=salestech.agency"
+            echo "--- ipv4 ---"
+            getent ahostsv4 salestech.agency || true
+            echo "--- ipv6 ---"
+            getent ahostsv6 salestech.agency || true
+
+            HTTP_CODE="$(curl --location --silent --show-error --max-time 25 --output "$BODY" --write-out '%{http_code}' https://salestech.agency/ 2>"$RUNNER_TEMP/curl-error.txt" || true)"
+            echo "http_code=${HTTP_CODE:-none}"
+
+            if [ -s "$RUNNER_TEMP/curl-error.txt" ]; then
+              echo "curl_error=$(tr '\n' ' ' < "$RUNNER_TEMP/curl-error.txt")"
+            fi
+
+            TITLE="$(grep -io '<title>[^<]*</title>' "$BODY" 2>/dev/null | head -n 1 | sed -E 's#</?title>##Ig' || true)"
+            echo "title=${TITLE:-none}"
+
+            if [ "$HTTP_CODE" = "200" ] && printf '%s' "$TITLE" | grep -qi 'Sales Tech'; then
+              echo "result=PASS"
+            else
+              echo "result=FAIL"
+            fi
+          } | tee "$REPORT"
+
+          cp "$REPORT" domain-smoke-report.txt
+
+      - name: Upload smoke report
+        uses: actions/upload-artifact@v4
+        with:
+          name: domain-smoke-report
+          path: domain-smoke-report.txt
+          if-no-files-found: error
+          retention-days: 1
